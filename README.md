@@ -14,3 +14,8 @@ At the end you should deliver an SQL script which can be used to create the SQL 
 
 ---
 
+My implementation is a Spring Boot app, backed by H2 in-memory DB.
+
+Just clone the repo, enter the project folder and run **mvn spring-boot:run**. 
+
+When the build has finished, you can list feed entries by calling the <http://localhost:8080/list/> endpoint, or you can watch feed retrieval related logs in the stdout. 
