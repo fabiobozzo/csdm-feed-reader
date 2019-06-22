@@ -35,10 +35,10 @@ public class FeedEntry implements Serializable {
     @Column(name = "pub_date")
 	private Date pubDate;
 	
-	@Column(name="permalink", nullable = false)
+	@Column(name="permalink", nullable = false, unique=true)
 	private String permalink;
 	
-	@Column(name="image_url", unique=true)
+	@Column(name="image_url")
 	private String imageUrl;
 
 	public Long getId() {

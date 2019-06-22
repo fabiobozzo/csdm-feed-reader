@@ -36,12 +36,11 @@ public class FeedEntryService {
 			throw new Exception("Can't parse feed content: "+feedRawContent);
 		}
 		
-		for ( FeedEntry fe : feedParsedEntries ) {
-			
+		feedParsedEntries.forEach( fe -> {
 			if ( feedEntryDao.findByPermalink(fe.getPermalink()) ==null ) {
 				feedEntryDao.save(fe);
 			}
-		}
+		});
 	}
 	
 	public List<FeedEntry> listFeedEntries() throws Exception {
