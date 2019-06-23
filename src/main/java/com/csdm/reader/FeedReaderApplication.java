@@ -11,5 +11,4 @@ public class FeedReaderApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FeedReaderApplication.class, args);
 	}
-
 }
