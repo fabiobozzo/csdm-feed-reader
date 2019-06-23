@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class SchedulerService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(SchedulerService.class);
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	FeedEntryService feedEntryService;
 	
-//	@Scheduled( fixedDelayString="${feed.schedule.interval}", initialDelay=5000 )
+	@Scheduled( fixedDelayString="${feed.schedule.interval}", initialDelay=5000 )
 	public void updateFeedEntries() {
 		try {
 			
 			feedEntryService.updateFeedEntries();
 			
 		} catch(Exception e) {
-			logger.error("updateFeedEntries FAIL: ",e);
+			logger.error(e.toString());
 		}
 	}
 }

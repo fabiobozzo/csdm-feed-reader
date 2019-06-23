@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import com.csdm.reader.util.FeedRetriever;
 
 @Service
 public class FeedEntryService {
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	Environment env;
@@ -32,12 +36,8 @@ public class FeedEntryService {
 		
 		List<FeedEntry> feedParsedEntries = feedParser.parse(feedRawContent);
 		
-		if ( feedParsedEntries==null ) {
-			throw new Exception("Can't parse feed content: "+feedRawContent);
-		}
-		
 		feedParsedEntries.forEach( fe -> {
-			if ( feedEntryDao.findByPermalink(fe.getPermalink()) ==null ) {
+			if ( feedEntryDao.findByPermalink(fe.getPermalink()) == null ) {
 				feedEntryDao.save(fe);
 			}
 		});
@@ -45,7 +45,7 @@ public class FeedEntryService {
 	
 	public List<FeedEntry> listFeedEntries() throws Exception {
 		
-		Iterable<FeedEntry> findAll = feedEntryDao.findAll();
+		Iterable<FeedEntry> findAll = feedEntryDao.findAllByOrderByPubDateDesc();
 		List<FeedEntry> feedEntries = new ArrayList<>();
 		findAll.forEach(feedEntries::add);
 		

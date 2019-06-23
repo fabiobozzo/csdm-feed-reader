@@ -10,5 +10,8 @@ import com.csdm.reader.model.FeedEntry;
 @Repository
 public interface FeedEntryDao extends CrudRepository<FeedEntry, Long> {
 
-	public List<FeedEntry> findByPermalink(String permalink);
+	public FeedEntry findByPermalink(String permalink);
+	
+	public List<FeedEntry> findAllByOrderByPubDateDesc();
+	
 }

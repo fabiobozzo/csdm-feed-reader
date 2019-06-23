@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,10 +29,11 @@ public class FeedEntry implements Serializable {
 	@Column(name="link")
 	private String link;
 	
+	@Lob
 	@Column(name="description")
 	private String description;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
     @Column(name = "pub_date")
 	private Date pubDate;
 	
@@ -40,6 +42,20 @@ public class FeedEntry implements Serializable {
 	
 	@Column(name="image_url")
 	private String imageUrl;
+
+	public FeedEntry() {
+		
+	}
+	
+	public FeedEntry(Long id, String title, String link, String description, Date pubDate, String permalink, String imageUrl) {
+		this.id = id;
+		this.title = title;
+		this.link = link;
+		this.description = description;
+		this.pubDate = pubDate;
+		this.permalink = permalink;
+		this.imageUrl = imageUrl;
+	}
 
 	public Long getId() {
 		return id;
