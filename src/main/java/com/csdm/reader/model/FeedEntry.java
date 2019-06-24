@@ -1,5 +1,8 @@
 package com.csdm.reader.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +17,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="feed_entries")
+@ApiModel(description = "All details about the FeedEntry.")
 public class FeedEntry implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,26 +25,33 @@ public class FeedEntry implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name="id", nullable = false)
+	@ApiModelProperty(notes="The database generated feed entry ID")
 	private Long id;
 	
 	@Column(name="title", nullable = false)
+	@ApiModelProperty(notes="The feed entry title")
 	private String title;
 	
 	@Column(name="link")
+	@ApiModelProperty(notes="The feed entry URL")
 	private String link;
 	
 	@Lob
 	@Column(name="description")
+	@ApiModelProperty(notes="The feed entry text content")
 	private String description;
 	
 	@Temporal(TemporalType.TIMESTAMP)
     @Column(name = "pub_date")
+	@ApiModelProperty(notes="The feed entry publishing date")
 	private Date pubDate;
 	
 	@Column(name="permalink", nullable = false, unique=true)
+	@ApiModelProperty(notes="The feed entry unique URL")
 	private String permalink;
 	
 	@Column(name="image_url")
+	@ApiModelProperty(notes="The feed entry image URL")
 	private String imageUrl;
 
 	public FeedEntry() {
